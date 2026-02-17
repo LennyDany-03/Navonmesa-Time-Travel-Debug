@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>facebook | Mark Zuckerberg's Profile (This is you!)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lucida Grande', Tahoma, Verdana, Arial, sans-serif;
+            font-size: 11px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to bottom, #6d84b4 0%, #3b5998 50%, #2d4373 100%);
+            height: 82px;
+            border-bottom: 1px solid #133783;
+            position: relative;
+        }
+
+        .header-content {
+            width: 760px;
+            margin: 0 auto;
+            padding-top: 8px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: -1px;
+            float: left;
+            margin-top: 5px;
+        }
+
+        .header-nav {
+            float: right;
+            margin-top: 10px;
+        }
+
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-size: 11px;
+        }
+
+        .header-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-header {
+            background-color: #3b5998;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* Container */
+        .container {
+            width: 760px;
+            margin: 20px auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            background: white;
+            border: 1px solid #d8dfea;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+
+        .sidebar-section h3 {
+            background: linear-gradient(to bottom, #6d84b4, #3b5998);
+            color: white;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+            padding: 5px 0;
+        }
+
+        .sidebar-section li {
+            padding: 3px 8px;
+        }
+
+        .sidebar-section li a {
+            color: #3b5998;
+            text-decoration: none;
+        }
+
+        .sidebar-section li a:hover {
+            text-decoration: underline;
+        }
+
+        .sidebar-section li .count {
+            color: #999;
+            font-size: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+        }
+
+        .profile-box {
+            background: white;
+            border: 1px solid #d8dfea;
+            margin-bottom: 10px;
+            padding: 10px;
+        }
+
+        .profile-top {
+            display: flex;
+            gap: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #d8dfea;
+            margin-bottom: 10px;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border: 3px solid #d8dfea;
+            overflow: hidden;
+        }
+
+        .profile-pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 18px;
+            color: #3b5998;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .profile-info .meta {
+            color: #666;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .profile-actions {
+            margin-top: 15px;
+        }
+
+        .profile-actions a {
+            display: inline-block;
+            color: #3b5998;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 11px;
+        }
+
+        .profile-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .info-section {
+            margin-top: 15px;
+        }
+
+        .info-section h2 {
+            color: #3b5998;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #d8dfea;
+        }
+
+        .info-row {
+            padding: 5px 0;
+            display: flex;
+        }
+
+        .info-label {
+            width: 120px;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .info-value {
+            flex: 1;
+            color: #333;
+        }
+
+        .info-value a {
+            color: #3b5998;
+            text-decoration: none;
+        }
+
+        .info-value a:hover {
+            text-decoration: underline;
+        }
+
+        .status-update {
+            background: #f7f7f7;
+            border: 1px solid #ccc;
+            padding: 8px;
+            margin-bottom: 10px;
+            font-size: 11px;
+        }
+
+        .status-update textarea {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #bbb;
+            padding: 5px;
+            font-family: inherit;
+            font-size: 11px;
+            resize: vertical;
+        }
+
+        .status-update button {
+            margin-top: 5px;
+            padding: 3px 10px;
+            background: linear-gradient(to bottom, #6d84b4, #3b5998);
+            color: white;
+            border: 1px solid #29447e;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .wall-post {
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .wall-post:last-child {
+            border-bottom: none;
+        }
+
+        .wall-post-header {
+            margin-bottom: 5px;
+        }
+
+        .wall-post-header img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 5px;
+            border: 1px solid #d8dfea;
+        }
+
+        .wall-post-header a {
+            color: #3b5998;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .wall-post-header a:hover {
+            text-decoration: underline;
+        }
+
+        .wall-post-time {
+            color: #999;
+            font-size: 10px;
+            margin-left: 5px;
+        }
+
+        .wall-post-content {
+            margin-left: 35px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .wall-post-actions {
+            margin-left: 35px;
+            margin-top: 5px;
+        }
+
+        .wall-post-actions a {
+            color: #3b5998;
+            text-decoration: none;
+            font-size: 10px;
+            margin-right: 10px;
+        }
+
+        .wall-post-actions a:hover {
+            text-decoration: underline;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border: 1px solid #d8dfea;
+        }
+
+        .see-all {
+            color: #3b5998;
+            text-decoration: none;
+            font-size: 11px;
+            float: right;
+            margin-top: -20px;
+        }
+
+        .see-all:hover {
+            text-decoration: underline;
+        }
+
+        .tab-navigation {
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            border-bottom: none;
+            padding: 0;
+            margin-bottom: -1px;
+        }
+
+        .tab-navigation a {
+            display: inline-block;
+            padding: 5px 15px;
+            color: #3b5998;
+            text-decoration: none;
+            border-right: 1px solid #ccc;
+            background: #f0f0f0;
+        }
+
+        .tab-navigation a.active {
+            background: white;
+            border-bottom: 1px solid white;
+            font-weight: bold;
+        }
+
+        .tab-navigation a:hover {
+            background: #e8e8e8;
+        }
+
+        .friends-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .friend-item {
+            text-align: center;
+        }
+
+        .friend-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #d8dfea;
+        }
+
+        .friend-item a {
+            display: block;
+            color: #3b5998;
+            text-decoration: none;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        .friend-item a:hover {
+            text-decoration: underline;
+        }
+
+        .mini-feed-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .mini-feed-item:last-child {
+            border-bottom: none;
+        }
+
+        .mini-feed-item img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+            border: 1px solid #d8dfea;
+        }
+
+        .mini-feed-item a {
+            color: #3b5998;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .mini-feed-item a:hover {
+            text-decoration: underline;
+        }
+
+        .mini-feed-time {
+            color: #999;
+            font-size: 10px;
+        }
+
+        .collapse-arrow {
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+            color: #3b5998;
+            font-weight: bold;
+        }
+
+        .network-list {
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .network-list a {
+            color: #3b5998;
+            text-decoration: none;
+        }
+
+        .network-list a:hover {
+            text-decoration: underline;
+        }
+
+        .network-count {
+            color: #999;
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">facebook</div>
+            <div class="header-nav">
+                <a href="#">home</a>
+                <a href="#">search</a>
+                <a href="#">friends</a>
+                <a href="#">invite</a>
+                <a href="#">help</a>
+                <a href="#">logout</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-header">
+        Mark Zuckerberg's Profile (This is you!)
+    </div>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Search</h3>
+                <div style="padding: 8px;">
+                    <input type="text" style="width: 100%; padding: 3px; border: 1px solid #bbb;" placeholder="Search...">
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>My Profile</h3>
+                <ul>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Edit Profile</a></li>
+                    <li><a href="#">My Photos</a></li>
+                    <li><a href="#">My Videos</a></li>
+                    <li><a href="#">My Events</a></li>
+                    <li><a href="#">My Groups <span class="count">(13)</span></a></li>
+                    <li><a href="#">My Notes</a></li>
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">My Privacy</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><span class="collapse-arrow">▼</span> Updates</h3>
+                <div style="padding: 8px; font-size: 11px; color: #666;">
+                    <div style="margin-bottom: 8px;">
+                        <strong>5</strong> updates this week.<br>
+                        <strong>8</strong> updates next week.<br>
+                        <a href="#" style="color: #3b5998; text-decoration: none;">Updated on Friday</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <h3><span class="collapse-arrow">▼</span> Friends in Other Networks</h3>
+                <div class="network-list" style="padding: 8px;">
+                    <div style="margin-bottom: 5px;">
+                        Your other friends:<br>
+                        <a href="#">Harvard</a> <span class="network-count">(147)</span><br>
+                        <a href="#">LA</a> <span class="network-count">(6)</span><br>
+                        <a href="#">Palo Alto, CA</a> <span class="network-count">(8)</span><br>
+                        Networks you belong to:<br>
+                        <a href="#">Harvard</a> <span class="network-count">(147)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Profile Box -->
+            <div class="profile-box">
+                <div class="profile-top">
+                    <div class="profile-pic">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Profile Picture">
+                    </div>
+                    <div class="profile-info">
+                        <h1>Mark<br>Zuckerberg</h1>
+                        <div class="meta">
+                            <strong>Harvard</strong><br>
+                            San Francisco, CA<br><br>
+                            Sex:<br>
+                            Birthday:<br>
+                            Hometown:<br>
+                            Relationship Status:<br>
+                            Looking For:<br>
+                            Political Views:<br>
+                            Interests:
+                        </div>
+                        <div class="meta" style="margin-left: 120px; margin-top: -142px;">
+                            <br><br><br>
+                            Male<br>
+                            May 14, 1984<br>
+                            Dobbs Ferry, NY<br>
+                            In a Relationship<br>
+                            Random Play, Friendship<br>
+                            Very Liberal<br>
+                            See All
+                        </div>
+                        <div class="profile-actions">
+                            <a href="#">Send Mark a Message</a>
+                            <a href="#">Poke Mark</a>
+                            <a href="#">Write on Mark's Wall</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>Contact Info <a href="#" class="see-all">See All</a></h2>
+                    <div class="info-row">
+                        <div class="info-label">Email:</div>
+                        <div class="info-value"><a href="#">mark@facebook.com</a></div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-label">AIM Screenname:</div>
+                        <div class="info-value">Add Screenname</div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>Mini-Feed <a href="#" class="see-all">See All</a></h2>
+                    <div class="mini-feed-item">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="">
+                        <a href="#">Mark</a> commented on an <a href="#">Ezra Callahan's</a> s pic. Cool #16. <span class="mini-feed-time">6 hrs</span> - 
+                        <a href="#">pic link to pic</a>
+                    </div>
+                    <div class="mini-feed-item">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="">
+                        <a href="#">Mark</a> joined the group <a href="#">Future Scientists and Engineers Society</a>. 
+                        <span class="mini-feed-time">8 hrs</span>
+                    </div>
+                    <div class="mini-feed-item">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="">
+                        <a href="#">Mark</a> wrote on the wall for the group <a href="#">LOCKDOWN</a>. 
+                        <span class="mini-feed-time">Yesterday</span>
+                    </div>
+                    <div class="mini-feed-item">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" alt="">
+                        Jeff tagged <a href="#">Mark</a> in two photos. <span class="mini-feed-time">3 days</span>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>Photos of Mark (194) <a href="#" class="see-all">See All</a></h2>
+                    <div class="photo-grid">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=200&h=150&fit=crop" alt="Photo 1">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=150&fit=crop" alt="Photo 2">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=150&fit=crop" alt="Photo 3">
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <a href="#" style="color: #3b5998; text-decoration: none; font-size: 11px;">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&h=60&fit=crop" style="width: 60px; height: 60px; border: 1px solid #d8dfea; vertical-align: middle; margin-right: 5px;" alt="">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" style="width: 60px; height: 60px; border: 1px solid #d8dfea; vertical-align: middle; margin-right: 5px;" alt="">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" style="width: 60px; height: 60px; border: 1px solid #d8dfea; vertical-align: middle;" alt="">
+                            <span style="display: block; margin-top: 5px;"><a href="#">Mark</a> and <a href="#">Jose</a> are now friends. <span style="color: #999; font-size: 10px;">3 days</span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wall Section -->
+            <div class="profile-box">
+                <h2 style="color: #3b5998; font-size: 14px; font-weight: bold; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #d8dfea;">
+                    The Wall
+                </h2>
+
+                <div class="status-update">
+                    <strong>Post a message, photo, or video on Mark's Wall</strong>
+                    <textarea placeholder="Write something..."></textarea>
+                    <button>Share</button>
+                </div>
+
+                <div class="wall-post">
+                    <div class="wall-post-header">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=60&h=60&fit=crop" alt="">
+                        <a href="#">Priscilla Chan</a> wrote <span class="wall-post-time">2 hours ago</span>
+                    </div>
+                    <div class="wall-post-content">
+                        Had an amazing time at the charity gala tonight! Thank you for organizing everything. ❤️
+                    </div>
+                    <div class="wall-post-actions">
+                        <a href="#">Comment</a> · <a href="#">Like</a> · <a href="#">Share</a>
+                    </div>
+                </div>
+
+                <div class="wall-post">
+                    <div class="wall-post-header">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&h=60&fit=crop" alt="">
+                        <a href="#">Dustin Moskovitz</a> wrote <span class="wall-post-time">5 hours ago</span>
+                    </div>
+                    <div class="wall-post-content">
+                        Great meeting today! Can't wait to see where this platform goes. The potential is incredible.
+                    </div>
+                    <div class="wall-post-actions">
+                        <a href="#">Comment</a> · <a href="#">Like</a> · <a href="#">Share</a>
+                    </div>
+                </div>
+
+                <div class="wall-post">
+                    <div class="wall-post-header">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=60&h=60&fit=crop" alt="">
+                        <a href="#">Chris Hughes</a> wrote <span class="wall-post-time">Yesterday at 11:45pm</span>
+                    </div>
+                    <div class="wall-post-content">
+                        Just saw the new features you're working on. Mind = blown! 🚀
+                    </div>
+                    <div class="wall-post-actions">
+                        <a href="#">Comment</a> · <a href="#">Like</a> · <a href="#">Share</a>
+                    </div>
+                </div>
+
+                <div class="wall-post">
+                    <div class="wall-post-header">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop" alt="">
+                        <a href="#">Mark Zuckerberg</a> updated his status <span class="wall-post-time">2 days ago</span>
+                    </div>
+                    <div class="wall-post-content">
+                        Working on some exciting new features. Stay tuned!
+                    </div>
+                    <div class="wall-post-actions">
+                        <a href="#">Comment</a> · <a href="#">Like</a> · <a href="#">Share</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Friends Section -->
+            <div class="profile-box">
+                <h2 style="color: #3b5998; font-size: 14px; font-weight: bold; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #d8dfea;">
+                    Friends <span style="font-weight: normal; color: #666;">(684)</span>
+                    <a href="#" class="see-all">See All</a>
+                </h2>
+
+                <div class="tab-navigation">
+                    <a href="#" class="active">Recently Updated</a>
+                    <a href="#">Recently Added</a>
+                    <a href="#">Alphabetically</a>
+                </div>
+
+                <div style="border: 1px solid #d8dfea; padding: 10px; background: white;">
+                    <div class="friends-grid">
+                        <div class="friend-item">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop" alt="Friend">
+                            <a href="#">Priscilla Chan</a>
+                        </div>
+                        <div class="friend-item">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop" alt="Friend">
+                            <a href="#">Dustin Moskovitz</a>
+                        </div>
+                        <div class="friend-item">
+                            <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop" alt="Friend">
+                            <a href="#">Chris Hughes</a>
+                        </div>
+                        <div class="friend-item">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop" alt="Friend">
+                            <a href="#">Sheryl Sandberg</a>
+                        </div>
+                        <div class="friend-item">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop" alt="Friend">
+                            <a href="#">Eduardo Saverin</a>
+                        </div>
+                        <div class="friend-item">
+                            <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=150&h=150&fit=crop" alt="Friend">
+                            <a href="#">Sean Parker</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Information Section -->
+            <div class="profile-box">
+                <h2 style="color: #3b5998; font-size: 14px; font-weight: bold; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #d8dfea;">
+                    Information
+                </h2>
+
+                <div class="info-row">
+                    <div class="info-label">Member Since:</div>
+                    <div class="info-value">February 4, 2004</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Last Update:</div>
+                    <div class="info-value">December 11 at 10:51am</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Mobile Phone:</div>
+                    <div class="info-value">Add Phone</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Website:</div>
+                    <div class="info-value"><a href="#">http://www.facebook.com</a></div>
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Activities:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    Revolutionizing how people connect, Open-sourcing, Breaking Things and Moving Fast, Building a Free and Open Information to the Internet
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Interests:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    Opening up the world, Making new friends, Minimalist interfaces, Elegant code
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Favorite Music:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    Lady Gaga, Daft Punk, Jay-Z, Taylor Swift
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Favorite TV Shows:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    The West Wing, The Wire, Silicon Valley
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Favorite Movies:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    The Social Network, Gladiator, Ender's Game, The Matrix
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Favorite Books:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    Ender's Game, The Aeneid, The Odyssey
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">Favorite Quotations:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    "Move fast and break things. Unless you are breaking stuff, you are not moving fast enough." <br>
+                    "Done is better than perfect."<br>
+                    "The biggest risk is not taking any risk."
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 15px 0 8px;">About Me:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    I'm trying to make the world a more open place by helping people connect and share.
+                </div>
+            </div>
+
+            <!-- Education and Work -->
+            <div class="profile-box">
+                <h2 style="color: #3b5998; font-size: 14px; font-weight: bold; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #d8dfea;">
+                    Education and Work
+                </h2>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 10px 0 8px;">College:</h3>
+                <div style="color: #333; line-height: 1.5; margin-bottom: 10px;">
+                    Harvard University '06<br>
+                    Concentration: Computer Science and Psychology
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 10px 0 8px;">High School:</h3>
+                <div style="color: #333; line-height: 1.5; margin-bottom: 10px;">
+                    Phillips Exeter Academy '02<br>
+                    Ardsley High School
+                </div>
+
+                <h3 style="color: #3b5998; font-size: 12px; font-weight: bold; margin: 10px 0 8px;">Employer:</h3>
+                <div style="color: #333; line-height: 1.5;">
+                    Facebook<br>
+                    Position: Founder and CEO<br>
+                    Time Period: 2004 - Present
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube - Broadcast Yourself</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: #fff;
+            border-bottom: 2px solid #CCCCCC;
+            padding: 10px 0;
+        }
+
+        .header-content {
+            width: 980px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .youtube-logo {
+            background-color: #CC181E;
+            color: white;
+            padding: 8px 15px;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 2px;
+            letter-spacing: -1px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 5px 8px;
+            border: 1px solid #999;
+            font-size: 12px;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .header-links a {
+            color: #0033CC;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .header-links a:hover {
+            text-decoration: underline;
+        }
+
+        .upload-btn {
+            background-color: #FFC700;
+            color: #000;
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 2px;
+            border: 1px solid #CC9900;
+        }
+
+        .upload-btn:hover {
+            background-color: #FFDD00;
+            text-decoration: none;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background-color: #E5E5E5;
+            border-bottom: 1px solid #ccc;
+            padding: 8px 0;
+        }
+
+        .nav-content {
+            width: 980px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-content a {
+            color: #333;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .nav-content a:hover {
+            text-decoration: underline;
+        }
+
+        .nav-content a.active {
+            color: #CC181E;
+        }
+
+        /* Container */
+        .container {
+            width: 980px;
+            margin: 20px auto;
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 180px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            padding-bottom: 3px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .sidebar-section ul {
+            list-style: none;
+        }
+
+        .sidebar-section li {
+            padding: 3px 0;
+        }
+
+        .sidebar-section a {
+            color: #0033CC;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .sidebar-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+        }
+
+        .featured-section {
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            background-color: #E5E5E5;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .video-item {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .video-thumb {
+            width: 100%;
+            height: 97px;
+            background-color: #000;
+            border: 1px solid #999;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 3px;
+            right: 3px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2px 4px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .video-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: #0033CC;
+            margin-top: 5px;
+            display: block;
+            text-decoration: none;
+            line-height: 1.3;
+        }
+
+        .video-title:hover {
+            text-decoration: underline;
+        }
+
+        .video-meta {
+            font-size: 11px;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .video-meta a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .video-meta a:hover {
+            text-decoration: underline;
+        }
+
+        .video-stats {
+            font-size: 10px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        .rating-stars {
+            color: #FFC700;
+            font-size: 11px;
+            letter-spacing: -1px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #F0F0F0;
+            border-top: 1px solid #ccc;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        .footer-content {
+            width: 980px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #0033CC;
+            text-decoration: none;
+            font-size: 11px;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 10px;
+        }
+
+        .channel-icon {
+            width: 16px;
+            height: 16px;
+            background-color: #ccc;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 3px;
+            border-radius: 2px;
+        }
+
+        .verified-badge {
+            background-color: #00A000;
+            color: white;
+            font-size: 9px;
+            padding: 1px 3px;
+            border-radius: 2px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="#" class="youtube-logo">YouTube</a>
+                <span class="tagline">Broadcast Yourself™</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="header-links">
+                <a href="#" class="upload-btn">Upload</a>
+                <a href="#">Sign Up</a>
+                <a href="#">Log In</a>
+                <a href="#">Help</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <div class="nav-content">
+            <a href="#" class="active">Home</a>
+            <a href="#">Videos</a>
+            <a href="#">Channels</a>
+            <a href="#">Community</a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="#">Autos & Vehicles</a></li>
+                    <li><a href="#">Comedy</a></li>
+                    <li><a href="#">Education</a></li>
+                    <li><a href="#">Entertainment</a></li>
+                    <li><a href="#">Film & Animation</a></li>
+                    <li><a href="#">Gaming</a></li>
+                    <li><a href="#">Howto & Style</a></li>
+                    <li><a href="#">Music</a></li>
+                    <li><a href="#">News & Politics</a></li>
+                    <li><a href="#">Nonprofits & Activism</a></li>
+                    <li><a href="#">People & Blogs</a></li>
+                    <li><a href="#">Pets & Animals</a></li>
+                    <li><a href="#">Science & Technology</a></li>
+                    <li><a href="#">Sports</a></li>
+                    <li><a href="#">Travel & Events</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Videos</h3>
+                <ul>
+                    <li><a href="#">Most Viewed</a></li>
+                    <li><a href="#">Most Discussed</a></li>
+                    <li><a href="#">Top Favorites</a></li>
+                    <li><a href="#">Top Rated</a></li>
+                    <li><a href="#">Most Linked</a></li>
+                    <li><a href="#">Recently Featured</a></li>
+                    <li><a href="#">Most Responded</a></li>
+                    <li><a href="#">Watch on Mobile</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Channels</h3>
+                <ul>
+                    <li><a href="#">Most Subscribed</a></li>
+                    <li><a href="#">Most Viewed</a></li>
+                    <li><a href="#">Directors</a></li>
+                    <li><a href="#">Musicians</a></li>
+                    <li><a href="#">Comedians</a></li>
+                    <li><a href="#">Gurus</a></li>
+                    <li><a href="#">Partners</a></li>
+                    <li><a href="#">Sponsored</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-section">
+                <h3>Community</h3>
+                <ul>
+                    <li><a href="#">Groups</a></li>
+                    <li><a href="#">Contests</a></li>
+                    <li><a href="#">TestTube</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Videos Being Watched Right Now -->
+            <div class="featured-section">
+                <div class="section-header">Videos Being Watched Right Now</div>
+                <div class="video-grid">
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">3:24</span>
+                        </div>
+                        <div class="video-title">Amazing Cat Compilation 2007</div>
+                        <div class="video-meta">
+                            From: <a href="#">funnycats</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 125,432 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">2:15</span>
+                        </div>
+                        <div class="video-title">Epic Guitar Solo</div>
+                        <div class="video-meta">
+                            From: <a href="#">rockstar123</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 89,234 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">5:42</span>
+                        </div>
+                        <div class="video-title">How to Make Chocolate Cake</div>
+                        <div class="video-meta">
+                            From: <a href="#">cookingwithsarah</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 45,123 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">1:33</span>
+                        </div>
+                        <div class="video-title">Skateboard Trick Montage</div>
+                        <div class="video-meta">
+                            From: <a href="#">sk8erboy</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 234,567 views
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Featured Videos -->
+            <div class="featured-section">
+                <div class="section-header">Featured Videos</div>
+                <div class="video-grid">
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1516802273409-68526ee1bdd6?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">4:20</span>
+                        </div>
+                        <div class="video-title">Basketball Trick Shots</div>
+                        <div class="video-meta">
+                            From: <a href="#">sportsfan99</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 567,890 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">3:15</span>
+                        </div>
+                        <div class="video-title">Indie Band Live Performance</div>
+                        <div class="video-meta">
+                            From: <a href="#">musiclover</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 123,456 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">6:30</span>
+                        </div>
+                        <div class="video-title">Dog Training Tutorial</div>
+                        <div class="video-meta">
+                            From: <a href="#">dogtrainer</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 98,765 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">2:45</span>
+                        </div>
+                        <div class="video-title">Tech Review - New Gadget</div>
+                        <div class="video-meta">
+                            From: <a href="#">techgeek2007</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 234,123 views
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Most Viewed -->
+            <div class="featured-section">
+                <div class="section-header">Most Viewed</div>
+                <div class="video-grid">
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1508921340878-ba53e1f016ec?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">3:56</span>
+                        </div>
+                        <div class="video-title">Viral Dance Video</div>
+                        <div class="video-meta">
+                            From: <a href="#">dancer123</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 1,234,567 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">4:12</span>
+                        </div>
+                        <div class="video-title">Movie Trailer - Coming Soon</div>
+                        <div class="video-meta">
+                            From: <a href="#">moviestudios</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 890,123 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">5:20</span>
+                        </div>
+                        <div class="video-title">Epic Concert Footage</div>
+                        <div class="video-meta">
+                            From: <a href="#">concertfan</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 765,432 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1533071123660-8974352254ac?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">2:33</span>
+                        </div>
+                        <div class="video-title">Funny Baby Laughing</div>
+                        <div class="video-meta">
+                            From: <a href="#">cutebabies</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 654,321 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">3:45</span>
+                        </div>
+                        <div class="video-title">Travel Vlog - Tokyo</div>
+                        <div class="video-meta">
+                            From: <a href="#">traveler2007</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 543,210 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1498550744921-75f79806b163?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">4:00</span>
+                        </div>
+                        <div class="video-title">Nature Documentary Clip</div>
+                        <div class="video-meta">
+                            From: <a href="#">naturelover</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 432,109 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">1:55</span>
+                        </div>
+                        <div class="video-title">Programming Tutorial</div>
+                        <div class="video-meta">
+                            From: <a href="#">codewizard</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★☆</span> 321,098 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1526666923127-b2970f64b422?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">3:10</span>
+                        </div>
+                        <div class="video-title">Food Challenge!</div>
+                        <div class="video-meta">
+                            From: <a href="#">foodie99</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 210,987 views
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Top Rated -->
+            <div class="featured-section">
+                <div class="section-header">Top Rated</div>
+                <div class="video-grid">
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">7:30</span>
+                        </div>
+                        <div class="video-title">Amazing Science Experiment</div>
+                        <div class="video-meta">
+                            From: <a href="#">scienceguy</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 156,789 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">4:45</span>
+                        </div>
+                        <div class="video-title">Piano Cover - Popular Song</div>
+                        <div class="video-meta">
+                            From: <a href="#">pianist2007</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 198,765 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">3:25</span>
+                        </div>
+                        <div class="video-title">Parkour Compilation</div>
+                        <div class="video-meta">
+                            From: <a href="#">extremesports</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 287,654 views
+                        </div>
+                    </a>
+
+                    <a href="#" class="video-item">
+                        <div class="video-thumb">
+                            <img src="https://images.unsplash.com/photo-1505682634904-d7c8d95cdc50?w=300&h=200&fit=crop" alt="Video thumbnail">
+                            <span class="video-duration">2:50</span>
+                        </div>
+                        <div class="video-title">Stand-Up Comedy Clip</div>
+                        <div class="video-meta">
+                            From: <a href="#">comedian123</a>
+                        </div>
+                        <div class="video-stats">
+                            <span class="rating-stars">★★★★★</span> 345,678 views
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Press</a>
+                <a href="#">Copyright</a>
+                <a href="#">Creators & Partners</a>
+                <a href="#">Advertising</a>
+                <a href="#">Developers</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Safety</a>
+                <a href="#">Send Feedback</a>
+                <a href="#">Test New Features</a>
+            </div>
+            <div class="footer-text">
+                © 2007 YouTube, LLC
+            </div>
+        </div>
+    </div>
+</body>
+</html>
